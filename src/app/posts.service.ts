@@ -11,4 +11,8 @@ export class PostsService {
     return this.http.get('/api/posts').map(res => res.json());
   }
 
+  getAuthToken () {
+    return this.http.post('/api/auth', {}).map(res => res.json());
+  }
+
 }
