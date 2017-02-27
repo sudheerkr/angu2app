@@ -2,11 +2,14 @@
 const express = require('express');
 const path = require('path');
 const http = require('http');
+const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const api = require('./routes/api');
 
 const app = express();
-const port = process.env.PORT || 3000;
+dotenv.config({encoding: 'base64'});
+dotenv.load();
+const port = process.env.APP_PORT || 3000;
 app.set('port', port);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
