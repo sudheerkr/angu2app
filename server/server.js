@@ -20,6 +20,24 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
+// if (app.get('env') === 'development') {
+//   app.use((err, req, res, next) => {
+//     res.status({err.status || 500});
+//     res.render('error', {
+//       message : err.message,
+//       error : err
+//     });
+//   });
+// }
+//
+// app.use((err, req, res, next) => {
+//   res.status({err.status || 500});
+//   res.render('error', {
+//     message : err.message,
+//     error : err
+//   });
+// });
+
 const server = http.createServer(app);
 
 server.listen(port, () => {
