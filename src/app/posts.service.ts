@@ -7,12 +7,15 @@ export class PostsService {
 
   constructor(private http : Http) { }
 
-  getAllPosts() {
-    return this.http.get('/api/posts').map(res => res.json());
-  }
-
   getAuthToken () {
     return this.http.post('/api/auth', {}).map(res => res.json());
   }
 
+  getAllPosts() {
+    return this.http.get('/api/posts').map(res => res.json());
+  }
+
+  getAllTwtrs () {
+    return this.http.post('/api/twitrs', {}).map(res => res.json());
+  }
 }

@@ -16,5 +16,4 @@ export class PostsComponent implements OnInit {
       this.posts = posts;
     });
   }
-
 }
