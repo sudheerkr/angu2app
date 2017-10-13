@@ -5,7 +5,11 @@ import { HeroService } from '../services/hero.service';
 @Component({
   selector: 'app-root',
   template: `<h1>{{title}}</h1>
-            <app-heroes></app-heroes>`
+            <nav>
+              <a routerLink="/heroes">Heroes</a>
+              <a routerLink="/dashboard">Dashboard</a>
+            </nav>
+            <router-outlet></router-outlet>`
 })
 
 
