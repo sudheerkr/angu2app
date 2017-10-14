@@ -1,10 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-</div>
-
 <div>
   <h2> My Heroes List.</h2>
   <ul class="heroes">
@@ -14,4 +8,9 @@
   </ul>
 </div>
 
-<hero-detail [hero]="selectedHero"></hero-detail>
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
