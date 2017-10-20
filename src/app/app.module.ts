@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 // imports for loading & configuring the in-memory web-api
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from '../services/in-memory-data.service';
 
 import { HeroService } from '../services/hero.service';
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   providers: [HeroService],
