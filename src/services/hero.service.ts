@@ -1,25 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Hero } from '../app/hero';
-//import { HEROES } from '../app/mock-heroes';
+import { Http, Headers } from '@angular/http';
+import { HEROES } from '../app/mock-heroes';
 
 import 'rxjs/add/operator/toPromise';
+import { Hero } from '../app/hero';
 
 @Injectable()
 export class HeroService {
 	
 	private heroesUrl = 'api/heroes';
+	private headers = new Headers({'Content-Type': 'application/json'});
+
 	constructor(private http : Http) {}
 
-//	getHeroes(): Promise<Hero[]> {
-//		return Promise.resolve(HEROES);
-//	}
+	//getHeroes(): Promise<Hero[]> {
+	//	return Promise.resolve(HEROES);
+	//}
 
 	
 	getHeroes(): Promise<Hero[]> {
 		return this.http.get(this.heroesUrl)
 		.toPromise()
-		.then(response => response.json().data as Hero[])
+		.then(response => response.json() as Hero[])
 		.catch(this.handleError);
 	}
 
@@ -29,7 +31,36 @@ export class HeroService {
 	}
 
 	getHero(id : number) : Promise<Hero>{
-		return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+		const url = `${this.heroesUrl}/${id}`;
+		return this.http.get(url)
+										.toPromise()
+										.then(response => response.json() as Hero)
+										.catch(this.handleError);
+		//return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+	}
+
+	update(hero : Hero) : Promise<Hero> {
+		const url = `${this.heroesUrl}/${hero.id}`;
+		return this.http.put(url, JSON.stringify(hero), {headers: this.headers})
+								.toPromise()
+								.then(() => hero)
+								.catch(this.handleError);
+	}
+
+	create(name : string) : Promise<Hero>{
+		return this.http
+						.post(this.heroesUrl, JSON.stringify({name : name}), {headers: this.headers})
+						.toPromise()
+						.then(res => res.json() as Hero)
+						.catch(this.handleError);
+	}
+
+	delete(id : number) : Promise<void> {
+		const url = `${this.heroesUrl}/${id}`;
+		return this.http.delete(url, {headers: this.headers})
+								.toPromise()
+								.then(() => null)
+								.catch(this.handleError);
 	}
 
 	getHeroesSlowly(): Promise<Hero[]> {
@@ -40,4 +71,6 @@ export class HeroService {
 			}, 2000)
 		});
 	}
+
+
 }

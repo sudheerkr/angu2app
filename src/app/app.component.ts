@@ -10,7 +10,8 @@ import { HeroService } from '../services/hero.service';
               <a routerLink="/heroes">Heroes</a>
             </nav>
             <router-outlet></router-outlet>`,
-  styles : [`h1 {
+  styles : [
+  					`h1 {
 						  font-size: 1.2em;
 						  color: #999;
 						  margin-bottom: 0;
@@ -37,7 +38,8 @@ import { HeroService } from '../services/hero.service';
 						}
 						nav a.active {
 						  color: #039be5;
-						}`]
+						}`
+					]
 })
 
 
